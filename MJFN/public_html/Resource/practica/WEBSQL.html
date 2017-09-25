@@ -8,7 +8,7 @@ and open the template in the editor.
     
     <head>
         
-        <title>PRACTICA</title>
+        <title>WEBSQL</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../css/Esqueleto.css" /> 
@@ -26,8 +26,8 @@ and open the template in the editor.
             tx.executeSql('INSERT INTO ALUMNO (id_alumno, nombre, mat ) VALUES (5, "Samuel", "13")');
             tx.executeSql('INSERT INTO  ALUMNO (id_alumno, nombre, mat ) VALUES (6, "Rosa", "3")'); 
             tx.executeSql('CREATE TABLE IF NOT EXISTS PUNTO(id_alumno unique, idpuntos TEXT, numpuntos INTEGER, fechap DATE)'); 
-            tx.executeSql('INSERT INTO PUNTO (id_alumno, idpuntos, numpuntos, fechap) VALUES (1, "P1", "10", "07/09/2017")');
-            tx.executeSql('INSERT INTO PUNTO (id_alumno, idpuntos, numpuntos, fechap) VALUES (2, "P2", "150", "01/09/2017")');
+            tx.executeSql('INSERT INTO PUNTO (id_alumno, idpuntos, numpuntos, fechap) VALUES (1, "P1", "500", "07/09/2017")');
+            tx.executeSql('INSERT INTO PUNTO (id_alumno, idpuntos, numpuntos, fechap) VALUES (2, "P2", "100", "01/09/2017")');
             tx.executeSql('INSERT INTO PUNTO (id_alumno, idpuntos, numpuntos, fechap) VALUES (3, "P3", "90", "02/08/2017")');
             tx.executeSql('INSERT INTO PUNTO (id_alumno, idpuntos, numpuntos, fechap) VALUES (4, "P4", "75", "05/06/2017")');
             tx.executeSql('INSERT INTO PUNTO (id_alumno, idpuntos, numpuntos, fechap) VALUES (5, "P5", "70", "12/09/2017")');
@@ -52,18 +52,18 @@ and open the template in the editor.
                           Suma(W,X);
                          // document.forms["myform"]["result"].value=Y;                        
                         for (i = 0; i < len; i++){
-                            Y=results.rows.item(i).numpuntos;
-                            msg2 = "\n Nombre:"+results.rows.item(i).nombre+"\n Fecha:" + results.rows.item(i).fechap +'\n Puntos: '+results.rows.item(i).numpuntos+ "\n";
+                          //  Y=results.rows.item(i).numpuntos;
+                            //msg2 = "\n Nombre:"+results.rows.item(i).nombre+"\n Fecha:" + results.rows.item(i).fechap +'\n Puntos: '+results.rows.item(i).numpuntos+ "\n";
                             //document.querySelector('#status').innerHTML +=  msg2;
-                            document.forms["myform"]["status"].value=msg2;
-                            changePUNTOS(Y);
+                            //document.forms["myform"]["status"].value=msg2;
+                            //changePUNTOS(Y);
                         }
                     }else{
-                            msg1 = "<p><b>No encontrado</b></p>";
+                            msg1 = "No encontrado";
                             document.forms["myform"]["status"].value=msg1;
                             //document.querySelector('#status').innerHTML +=  msg2; 
-                            token=true;
-                            changeUSER(token);
+                            //token=true;
+                            //changeUSER(token);
                       
                     }
                 }, null);
@@ -80,15 +80,13 @@ and open the template in the editor.
     
         function changePUNTOS(puntos) {
             var image = document.getElementById('myImage');
-            if(puntos >= 0){
-                image.src = "../imagenes/Carta_Assasin.png";
-            }else if (puntos<70) {
+            if (puntos < 70) {
                 image.src = "../imagenes/Sabercard.jpg";
             //token=false;
             } else if (puntos >= 70 && puntos <= 99) {
                 image.src = "../imagenes/Ridercard.jpg";
                 //token=false;
-            } else if (puntos >= 100) {
+            } else if (puntos > 100) {
                 image.src = "../imagenes/saintgrail.png";
                 //token=false;
             }
@@ -99,16 +97,17 @@ and open the template in the editor.
             image.src = "../imagenes/Holy_grail.jpg";
             token=false;
         }    		
-         function Suma(W,X) {
+        function Suma(W,X) {
              //x = document.forms["myform"]["visitas"].value;
             db.transaction(function (tx) {
            // sum=y+11;
-            alert("points  "+ W +" mat  " + X );
+          //  alert("points  "+ W +" mat  " + X );
+            Buscar2(X);
             tx.executeSql(
             //'UPDATE PUNTO, ALUMNO SET PUNTO.numpuntos=? WHERE PUNTO.id_alumno = ALUMNO.id_alumno AND ALUMNO.mat=?',[W,X],
             'UPDATE  PUNTO SET numpuntos=? WHERE id_alumno IN (SELECT id_alumno FROM ALUMNO WHERE mat=?)', [W,X],                
-            function (tx, results) {
-               /*var len = results.rows.length, i;
+            /*function (tx, results) {
+               var len = results.rows.length, i;
                alert("len     "+len);
                     if(len == true){
                          for (i = 0; i < len; i++){
@@ -118,14 +117,60 @@ and open the template in the editor.
                         }
                     }else{
                         alert("no encontro");
-                    }      */                
+                    }                      
                        
+                }, null*/);
+            });
+         }
+         
+
+        function  Buscar2(X){        
+            //x = document.forms["myform"]["visitas"].value;
+           //document.forms["myform"]["result"].value=x;
+            db.transaction(function (tx) {
+           
+            tx.executeSql('SELECT ALUMNO.mat, PUNTO.id_alumno, ALUMNO.nombre, PUNTO.fechap, PUNTO.numpuntos FROM PUNTO, ALUMNO WHERE PUNTO.id_alumno = ALUMNO.id_alumno AND ALUMNO.mat=?',[X+""],               
+            function (tx, results) {
+               var len = results.rows.length, i;
+              // msg1 = "<p>Resultados: " + len + "</p>";
+               //document.querySelector('#status').innerHTML +=  msg1;
+                    if(len == true){
+                        
+                          //X=results.rows.item(i).mat;
+                          //W=results.rows.item(i).numpuntos+70;
+                          //alert("Mat1     "+X+"Point1       "+W);
+                          //Suma(W,X);
+                         // document.forms["myform"]["result"].value=Y;                        
+                        for (i = 0; i < len; i++){
+                            Y=results.rows.item(i).numpuntos;
+                            msg2 = "\n Nombre:"+results.rows.item(i).nombre+'<br>'+"Fecha:" + results.rows.item(i).fechap +'\n Puntos: '+results.rows.item(i).numpuntos+ "\n";
+                            document.querySelector('.status').innerHTML +=  msg2;
+                            //document.forms["myform"]["status"].value=msg2;
+                            changePUNTOS(Y);
+                        }
+                    }else{
+                            msg1 = "No encontrado";
+                            document.forms["myform"]["status"].value=msg1;
+                            //document.querySelector('#status').innerHTML +=  msg2; 
+                            token=true;
+                            changeUSER(token);
+                      
+                    }
                 }, null);
             });
-            
-             
-         }
- 
+        }
+        //metodo de limpiar
+        function  Cleaner(){
+            /*$(document).ready(function(){
+                $("button").click(function(){
+                $(".status").remove();//empty();
+                });  
+            }); */
+            //document.querySelector(".status").clean();
+                var x = document.getElementById("erase");
+                x.querySelector(".status").innerHTML = "";
+        }
+
     </script>   
       
     <div class="cuerpo" ><br><br><br><br><br>Alumno<br><br>            
@@ -135,20 +180,22 @@ and open the template in the editor.
                 <!--span>El resultado es: </span--> 
                 <!--input  type="text" name="puntos" value="0" id="boton"/-->
                 <button type="button" onclick="Buscar();">Ingresar</button>
-                <button type="reset" onclick="changeImage2();" value="Reset">Borrar</button>
+                <button class="limpiar" type="reset" onclick="changeImage2();Cleaner();" value="Reset">Borrar</button>
   
             <div class="nota">
                 <div class="info">
                     <!--info del alumno-->    
-                    <output name="result"></output>
-                    <!--div id="status" ></div-->
+                    <!--output name="result"></output-->
+                    <div id="erase"> 
+                        <p class="status" >
+                    </div>
                     <output name="status"></output>
                 </div>
             </div>          
        </form><br><br>
         </div>
 
-    <div class="cuadro1">
+        <div class="cuadro1">
             <img id="myImage" src="../imagenes/Holy_grail.jpg"  width="98" height="158">
                 <br><br><br>
                 <div>

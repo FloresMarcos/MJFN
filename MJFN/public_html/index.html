@@ -5,12 +5,127 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<head>
+<meta charset="utf-8">
+<title>MJFN</title>
+<link rel="short icon" href="Resource/imagenes/Autoico.png"/>
+<!H1 class="colores"><!--P>PAGINA PERSONAL</P></H1-->
+<link rel="stylesheet" href="Resource/css/elementos2.css" type="text/css"/>
+</head>
+<body>
+<script src="Resource/jv/menu.js"></script> 
+
+<div id="cabeza">
+    <img  src="Resource/imagenes/RDBD.jpg" width="1080" height="165" alt="IMAGEN" />
+</div>
+<ul id="pilar2" class="topnav">
+        <!--li><a href="javascript:void(0)" class="tablinks"  id="menufuente" onclick="show('PORTADA');hide('portada');;openCity(event, 'PORTADA')" id="defaultOpen">PORTADA</a></li-->
+        <li><a href="javascript:void(0)" class="tablinks"  id="menufuente" onclick="show('PRACTICAS');hide('portada');openCity(event, 'PRACTICAS')" id="defaultOpen">PRACTICAS</a></li> 
+        <li><a href="javascript:void(0)" class="tablinks"  id="menufuente" onclick="show('ACERCA_DE_MI');hide('portada');openCity(event, 'ACERCA_DE_MI')">ACERCA_DE_MI</a></li> 
+</ul>
+<div onClick="show('portada')">
+    <div id="pilar"></div>
+    <div id="portada">
+        <h1 class="titulo">Bienvenidos .......</h1>
+        <p class="texto">Soy Marcos Javier Flores Nuñez esta es mi pagina web 
+        <br>elaborada en NETBEANS IDE 8.2 y subido en GITHUB
+        <br>con el fin objetivo de mostrar los avances que proceden 
+        <br>en el semestre de la materia de aplicaciones web de 
+        <br> base de datos.
+        </p>    
+    </div>
+</div>
+
+<!--div id="PORTADA" class="tabcontent">
+    <div id="caja2">
+        <marquee direction="right" scrolldelay="100" scrollamount="15" onmouseover="stop()" onmouseout="start()">
+        <h1><center>PAG1</center></h1>
+        </marquee>
+        <script  type="text/javascript" src="../Resource/menu.js"></script>   
+    </div>
+    <div id="caja3">
+        <div id="retorno">
+            <center><a onClick="show('portada');hide('PORTADA');refresco()">boton</a></center>             
+        </div>
+    </div>
+    
+</div-->
+
+<div id="PRACTICAS" class="tabcontent">
+    <div id="caja2">
+        <script  type="text/javascript" src="../Resource/menu.js"></script>   
+        <marquee direction="right" scrolldelay="100" scrollamount="15" onmouseover="stop()" onmouseout="start()">
+        <h1><center>PRACTICAS</center></h1>
+        </marquee>
+        
+    </div>
+    <div id="caja3">
+        <p><center><h2>En esta seccion se presentara las practicas de aplicaciones de base de datos web</h2></center></p>
+        <br><br><br>
+            <table>
+                <tr>
+                    <th>
+                        <a href="Resource/practica/reinvidicarse.html">
+                        <img src="Resource/imagenes/Sabercard.jpg" width="82" height="86" alt="IMAGEN" />
+                        </a> 
+                        <p>Practica de JSON</p>
+                    </th>
+                    <th>
+                        <a href="Resource/practica/BD.html">
+                        <img src="Resource/imagenes/Archer.png" width="82" height="86" alt="IMAGEN" />
+                        </a>
+                        <p>Practica WEBSQL</p>
+                    </th> 
+                    <th>
+                        <img src="Resource/imagenes/RDBD.jpg" width="82" height="86" alt="IMAGEN" />                       
+                        <p>Construccion</p>         
+                    </th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>
+                        <center>
+                        <a onClick="show('portada');hide('PRACTICAS');refresco()">
+                        <img src="Resource/imagenes/Previous.png" width="40" height="40" alt="IMAGEN">
+                        <br>
+                        <cenrter>Regresar</center></img>
+                        </a></center>    
+                        </a> 
+                    </th> 
+                    <th> </th>
+                </tr>
+            </table>
+                      
+    </div>          
+</div> 
+
+<div id="ACERCA_DE_MI" class="tabcontent">
+    <div id="caja2"> <script  type="text/javascript" src="../Resource/menu.js"></script>  
+        <marquee direction="right" scrolldelay="100" scrollamount="15" onmouseover="stop()" onmouseout="start()">
+        <h1><center>ACERCA DE MI</center></h1>
+        </marquee>
+    </div>
+    <div id="caja3">   
+        <p class="texto1"> Sobre mi soy una persona con varios gustos entre ellos destaco los video juegos: 
+        </p> 
+        <br><br><br><br>
+        <center><img src="Resource/imagenes/videojuegos.jpg" width="182" height="190" alt="IMAGEN" /></center>
+        <br>
+        <br>
+        <p class="texto1">Generalmente me marcaron una etapa de mi vida debido que era un proceso de cambios
+        en la tecnologia, mas en la introduccion de tecnologia en 3-D en el mundo tanto de la computacion 
+        y video juegos en finales 1990.
+        </p>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <center><a onClick="show('portada');hide('ACERCA_DE_MI');refresco()">
+             <img src="Resource/imagenes/Previous.png" width="40" height="40" alt="IMAGEN" >
+             <br>
+             <cenrter>Regresar</center></img>
+        </a></center>    
+       
+    </div>  
+</div> 
+
+</body>
 </html>
+

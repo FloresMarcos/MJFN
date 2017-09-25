@@ -1,0 +1,477 @@
+
+<html>
+    <head>
+<style> 
+    #absolute{
+    height: 200%;
+    width: 100%;        
+   
+        
+    }
+#cuadro1 {/*titulo*/
+    text-align: center;      
+    position: absolute; 
+    height: 23.8%;
+    width: 98.9%;
+    background: orange;
+      
+}
+#cuadro2 {/*ordenado por fecha*/
+    text-align: center;
+    position: absolute; 
+    background: greenyellow;
+    top:25%;
+    width: 50%; 
+    height: 75%; 
+    left: 0.5%;
+}
+#cuadro3 {/*ordenado por comentario*/
+    text-align: center;
+    position: absolute; 
+    background: green;
+    top:25%;
+    width: 50%; 
+    height: 75%; 
+    left: 49.5%; 
+    
+}
+#cuadro3-5 {/*ordenado por comentario*/
+    position: absolute; 
+    top:8%;
+    width: 85%; 
+    height: 75%; 
+    left: 12.5%; 
+    
+}
+#cuadro4 {/*integrantes*/
+    text-align: right;
+    position: absolute; 
+    background: red;
+    height: 15%;
+    width: 98.9%;
+    top:96%;
+}
+#cuadro5 {/*imagen*/
+    position: absolute; 
+    background: yellow;
+    bottom: 10%;
+    left: 10%;
+    width: 10%;
+    height: 80%;    
+}
+#cuadro6 {/*titulo del proyecto*/
+    text-align: center;
+    position: absolute; 
+    background: blueviolet;
+    bottom: 10%;
+    left: 180%;
+    width: 60%;
+    height: 180%;    
+}
+#TITLE{
+    text-align: center;
+    font-family: verdana;
+    font-size: 20px;
+}
+.text{
+    text-align: justify;
+    font-family: arial;
+    font-size: 15px;    
+    
+}
+</style>
+    <title>Practica no.1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body onload="lista();sumatoria();exam()"><!body onload="lista();lista2();sumatoria();exam()">
+    <div id='absolute'>
+        <div id="cuadro1"><p id="TITLE">TAREA</p>
+            <img id="cuadro5" src="../imagenes/milagro.jpg"  alt="imagen oxo" width="90" height="90">
+      
+        </div>
+        <div id="cuadro2" >
+            <div id="cuadro3-5" >
+                <div id="contenido2" class="text">
+                    LOS PRIMEROS 10 DE MAYOR A MENOR
+                </div>
+
+            </div><br>            
+        
+        </div>
+        <div id="cuadro3">
+                <div id="contenido1" class="text">
+                    LOS PRIMEROS 10 DE MAYOR A MENOR
+                    <br>
+                </div><br><br>
+                <div id="contenido3">
+                    TOTAL: <br>
+                </div><br><br>       
+        </div>
+        <div id="cuadro4">
+           <br>Integrantes:<br>
+           - Marcos Javier Flores Nuñez
+           <br>
+           - 
+           <br>
+        </div>          
+    </div>
+<script> 
+        function sumatoria() {
+            var xhttp = new XMLHttpRequest();
+            var xhttp2 = new XMLHttpRequest();
+            
+            xhttp2.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+            xhttp2.send();
+            var suma=0;
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                var variable = JSON.parse(this.responseText);
+                variable.sort(function(a, b){return a-b});
+                for(var x = 0 ; x < variable.length;x++){
+                   suma=suma+variable[x].id;
+                    }
+                document.getElementById("contenido3").innerHTML += suma+"<br>" ;
+            }
+            };
+            
+        xhttp.open("GET", "http://jsonplaceholder.typicode.com/posts", true);
+        xhttp.send();
+    }
+    
+  
+    function lista() {
+            var xhttp = new XMLHttpRequest();
+            var xhttp2 = new XMLHttpRequest();
+            var y=0;
+            xhttp2.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+            xhttp2.send();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                     var variable = JSON.parse(this.responseText);
+                    // var aux = JSON.parse(this.responseText);
+                        document.getElementById("contenido2").innerHTML +=
+                                 "<br>"+"Usuario: "+"- Con mas:        "+" - POST: "+"<br>";
+            for(var x = 0 ; x < 10 ;x++){
+                  //variable.sort(sort_by('id', true, parseInt));
+                   //variable = sortBy( variable, 'id' ).reverse();
+                      variable.sort(function(a, b){return b.id - a.id});  
+                   // document.getElementById("contenido2").innerHTML +=
+                     //       "NAME:"+obtUSER(variable[x].userId,xhttp2);
+                   y=y+1;
+
+                        document.getElementById("contenido2").innerHTML +=
+                                 "User: |"+ y+"|- Name: |"+variable[x].title+" |- ID: |"+variable[x].id+"<br>";
+                                  // + obtenerUsuario(variable[x].userId,xhttp2))
+                }
+            }
+            };
+            
+        xhttp.open("GET", "http://jsonplaceholder.typicode.com/posts", true);
+        xhttp.send();
+    }
+    
+ function lista2() {
+    var names;
+    var current = null;
+    var repeticiones = 0;
+    var xhttp = new XMLHttpRequest();
+    var xhttp2 = new XMLHttpRequest();
+
+    xhttp2.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+    xhttp2.send();
+            
+    xhttp.onreadystatechange = function() {
+        
+        if (this.readyState == 4 && this.status == 200) {
+                var variable = JSON.parse(this.responseText);
+            for(var i = 0 ; i < 10;i++){
+                variable.sort(function(a, b){return b.id - a.id});                
+                if (variable[i].userId != current) {
+                if (repeticiones > 0) {
+                      document.getElementById("contenido1").innerHTML += 
+                      "<br>"+
+                      "|AID|: "+variable[i].id+
+                      "|usuario local|"+current +
+                      "|-->publicaciones: "  + repeticiones + 
+                      "|usuario por funcion|"+obtUSER2(variable[i].userId,xhttp2),
+                      "<br>";
+                }
+                    current = variable[i].userId;
+                    //names=obtUSER2(variable[i].userId,xhttp2);
+                    repeticiones = 1;
+                } else {
+                    repeticiones++;
+                }
+            }
+                if (repeticiones > 0) {
+                    for(var i = 0 ; i < 10;i++){       
+                      document.getElementById("contenido1").innerHTML += 
+                      "<br>"+
+                      "|BID|: "+variable[i].id+
+                      "|usuario local|"+current +
+                      "|-->publicaciones: "  + repeticiones + 
+                      "|usuario por funcion|"+obtUSER2(variable[i].userId,xhttp2),
+                      "<br>";
+                    }   
+                }
+        }
+                            document.getElementById("contenido1").innerHTML += 
+                            "SUMA TOTAL: "+obtCONT(variable[x].userId,xhttp2)+"<br>"; 
+    };
+    xhttp.open("GET", "http://jsonplaceholder.typicode.com/posts", true);
+    xhttp.send();     
+  }
+    
+    function obtCONT(usuario, xhttp){
+            var auxi,aux;
+                   var variable = JSON.parse(xhttp.responseText);
+                   for(var auxiliar in variable){
+                     //  alert(variable[auxiliar].username)
+                      if(usuario == variable[auxiliar].id){
+                           aux= variable[auxiliar].id;
+                           auxi=array_count_values(aux);
+                           break;
+                        }
+                      /*   if(usuario == variable[auxiliar].id){
+                           cont++; 
+                           auxi=variable[auxiliar].username;
+                           break;
+                        }*/
+            
+                          var Cadena = "hola, casa, adios, casa";
+                var Search = "casa"
+                var i = 0;
+                var counter = 0;
+                while (i != -1){
+                    var i = Cadena.indexOf(Search,i);
+                        if (i != -1){
+                        i++;
+                        counter++;
+                        }
+                    }
+                //alert(counter);
+                    }
+            return auxi;   
+        }
+
+    
+    function obtSUMI(usuario, xhttp){
+            var auxi,sumi;
+            
+                   var variable = JSON.parse(xhttp.responseText);
+                   for(var auxiliar in variable){
+                     //  alert(variable[auxiliar].username)
+                       if(usuario == variable[auxiliar].id){
+                           auxi= variable[auxiliar].id;
+                           sumi=sumi+auxi;
+                          // break;
+                        }
+                    }
+            return sumi;   
+        }
+   
+
+    function obtUSER(usuario, xhttp){
+            var auxi;
+                    var variable = JSON.parse(xhttp.responseText);
+                   for(var auxiliar in variable){
+                     //  alert(variable[auxiliar].username)
+                       if(usuario == variable[auxiliar].id){
+                           auxi= variable[auxiliar].username;
+                           break;
+                        }
+                    }
+            return auxi;  
+        } 
+    function obtUSER2(usuario, xhttp){
+            var auxi;
+            var variable = JSON.parse(xhttp.responseText);
+            for(var i = 0 ; i < 10;i++){//for(var auxiliar in variable){
+                     //  alert(variable[auxiliar].username)
+                variable.sort(function(a, b) {return a - b});                      
+                        if(usuario == variable[i].id){
+                           auxi= variable[i].username;
+                           break;
+                        }
+            }
+            return auxi;  
+        }
+        
+ function exam(){
+    var consume = [{"key":"Test1"},{"key":"Test2"},{"key":"Test3"},{"key":"Test1"},{"key":"Test3"},{"key":"Test1"}]
+    var auxi, temp = [],produce = [],names;
+    var current = null;
+    var repeticiones = 0;
+    var xhttp = new XMLHttpRequest();
+    var xhttp2 = new XMLHttpRequest();
+
+    xhttp2.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+    xhttp2.send();
+            
+    xhttp.onreadystatechange = function() { 
+    if (this.readyState == 4 && this.status == 200) {
+        var variable = JSON.parse(this.responseText);
+        variable.sort(function(a, b){return b.id - a.id});  
+         for(var i=0;i<variable.length;i++){
+            if(temp.indexOf(variable[i].userId) == -1){
+                    temp.push(variable[i].userId);
+                    var _data = {};
+                    _data.name = variable[i].userId;
+                    _data.count = 1;
+                    produce.push(_data);
+            }else{
+                for(var j=0;j<produce.length;j++){
+                    if(produce[j].name === variable[i].userId){
+        		var _x = parseInt(produce[j].count) + 1;
+                        produce[j].count = _x;
+                    }
+                }
+            }
+        }
+    }
+        produce.sort();
+        for(var i=0 ;i<9; i++){
+                      document.getElementById("contenido1").innerHTML += 
+                      "<br>conteo"+produce[i].count+"nombre:|"+produce[i].name+"|"+obtUSER2(variable[i].userId,xhttp2)+"<br>";
+        }   
+        document.getElementById("contenido1").innerHTML += 
+        "SUMA TOTAL: "+obtCONT(variable[i].userId,xhttp2)+"<br>"; 
+    };
+    xhttp.open("GET", "http://jsonplaceholder.typicode.com/posts", true);
+    xhttp.send();  
+ }
+ /*   function exam(){
+     
+     var consume = [{"key":"Test1"},{"key":"Test2"},{"key":"Test3"},{"key":"Test1"},{"key":"Test3"},{"key":"Test1"}],
+     reduced = consume.reduce((p,c) => (p[c.key] ? p[c.key]++ : p[c.key] = 1,p),{}),
+     produce = [];
+     reduced[Symbol.iterator] = function*(){
+             var oKeys = Object.keys(this);
+                for(var key of oKeys) yield {name : key, count: this[key]};
+     };
+        produce = [...reduced];
+        console.log(produce);
+    }*/
+ /*function exam(){
+     
+ var consume = [{"key":"Test1"},{"key":"Test2"},{"key":"Test3"},{"key":"Test1"},{"key":"Test3"},{"key":"Test1"}]
+ var auxi;
+ 
+  var temp = [];
+ 
+ var produce = [];
+ 
+ for(var i=0;i<consume.length;i++){
+   if(temp.indexOf(consume[i].key) == -1){
+   		temp.push(consume[i].key);
+      var _data = {};
+      _data.name = variable[i].username;
+      _data.count = 1;
+      
+      produce.push(_data);
+   }else{
+     for(var j=0;j<produce.length;j++){
+     		if(produce[j].name === consume[i].key){
+        		var _x = parseInt(produce[j].count) + 1;
+            produce[j].count = _x;
+        }
+     }
+   }
+ }
+        produce.sort();
+        for(var i=0 ;i<9; i++){
+            
+                      document.getElementById("contenido3").innerHTML += 
+                      "<br>res"+produce[i].count+produce[i].name;
+        }
+    
+ }*/
+/*function exam(){
+    var names;
+    var current = null;
+    var repeticiones = 0;
+    var xhttp = new XMLHttpRequest();
+    var xhttp2 = new XMLHttpRequest();
+
+    xhttp2.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+    xhttp2.send();
+            
+    xhttp.onreadystatechange = function() {
+        
+        if (this.readyState == 4 && this.status == 200) {
+                var variable = JSON.parse(this.responseText);
+            for(var i = 0 ; i < 10;i++){
+                variable.sort(function(a, b){return b.id - a.id});                
+                if (variable[i].userId != current) {
+                if (repeticiones > 0) {
+                      document.getElementById("contenido1").innerHTML += 
+                      "<br>"+
+                      "|AID|: "+variable[i].id+
+                      "|usuario local|"+current +
+                      "|-->publicaciones: "  + repeticiones + 
+                      "|usuario por funcion|"+obtUSER2(variable[i].userId,xhttp2),
+                      "<br>";
+                }
+                    current = variable[i].userId;
+                    //names=obtUSER2(variable[i].userId,xhttp2);
+                    repeticiones = 1;
+                } else {
+                    repeticiones++;
+                }
+            }
+                if (repeticiones > 0) {
+                    for(var i = 0 ; i < 10;i++){       
+                      document.getElementById("contenido1").innerHTML += 
+                      "<br>"+
+                      "|BID|: "+variable[i].id+
+                      "|usuario local|"+current +
+                      "|-->publicaciones: "  + repeticiones + 
+                      "|usuario por funcion|"+obtUSER2(variable[i].userId,xhttp2),
+                      "<br>";
+                    }   
+                }
+        }
+                            document.getElementById("contenido1").innerHTML += 
+                            "SUMA TOTAL: "+obtCONT(variable[x].userId,xhttp2)+"<br>"; 
+    };
+    xhttp.open("GET", "http://jsonplaceholder.typicode.com/posts", true);
+    xhttp.send();     
+  }*/
+  /*function exam(){
+    //var arr = ["a", "b", "a", "z", "e", "a", "b", "f", "d", "f"],
+
+    //sortedArr = arr.sort();
+    var sortedArr = [],count = 1;
+    var xhttp = new XMLHttpRequest();
+    var xhttp2 = new XMLHttpRequest();
+ 
+    xhttp2.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+    xhttp2.send();
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+     var variable = JSON.parse(this.responseText);
+     sortedArr =variable.sort();
+     sortedArr = variable.sort(function(a, b) {
+            return a.id - b.id
+        });
+        
+        for (var i = 0; i < 10; i = i + count) {
+        count = 1;
+            for (var j = i + 1; j < 10; j++) {
+                if (sortedArr[i].id === sortedArr[j].id)
+                    count++;
+            }
+            document.getElementById("contenido3").innerHTML += 
+            sortedArr[i] + " = " + count + "<br>";
+        }
+    }
+   
+    };
+   xhttp.open("GET", "http://jsonplaceholder.typicode.com/posts", true);
+    xhttp.send();  
+    
+ }*/
+        </script>
+    </body>
+</html>
